@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import models.Task;
 import utils.DBUtil;
 
-@WebServlet("/show")
-public class ShowServlet extends HttpServlet {
+@WebServlet("/edit")
+public class EditServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public ShowServlet() {
+    public EditServlet() {
         super();
     }
 
@@ -31,8 +31,12 @@ public class ShowServlet extends HttpServlet {
 
         //タスクデータをリクエストスコープにセットしてshow.jspを呼ぶ
         request.setAttribute("task", m);
+        request.setAttribute("_token", request.getSession().getId());
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/show.jsp");
+        //タスクIDをセッションスコープに登録
+        request.getSession().setAttribute("task_id", m.getId());
+
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/edit.jsp");
         rd.forward(request, response);
     }
 
