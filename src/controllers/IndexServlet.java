@@ -25,11 +25,28 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-        List<Task> tasks = em.createNamedQuery("getAllTasks", Task.class).getResultList();
+        //開くページを取得
+        int page = 1;
+        try {
+            page = Integer.parseInt(request.getParameter("page"));
+
+        } catch(NumberFormatException e) {}
+
+        //最大件数と開始位置を指定してタスクを取得
+        List<Task> tasks = em.createNamedQuery("getAllTasks", Task.class)
+                             .setFirstResult(10 * (page - 1))
+                             .setMaxResults(10)
+                             .getResultList();
+
+        //全件数を取得
+        long tasks_count = (long)em.createNamedQuery("getTasksCount", Long.class)
+                                   .getSingleResult();
 
         em.close();
 
         request.setAttribute("tasks", tasks);
+        request.setAttribute("tasks_count", tasks_count);
+        request.setAttribute("page", page);
 
         //フラッシュメッセージがセッションスコープにセットされていたら
         if(request.getSession().getAttribute("flush") != null) {
