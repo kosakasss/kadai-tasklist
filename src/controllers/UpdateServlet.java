@@ -37,6 +37,8 @@ public class UpdateServlet extends HttpServlet {
             String content = request.getParameter("content");
             m.setContent(content);
 
+            m.setStatus_flag(Integer.parseInt(request.getParameter("status_flag")));
+
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             m.setUpdated_at(currentTime); //作成日時は変える必要ないため
 

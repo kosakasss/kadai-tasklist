@@ -21,6 +21,15 @@
                             <th>更新日時</th>
                             <td><fmt:formatDate value="${task.updated_at}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
                         </tr>
+                        <tr>
+                            <th>タスクの進捗具合</th>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${task.status_flag == 0}">未完了</c:when>
+                                    <c:otherwise>完了</c:otherwise>
+                                </c:choose>
+                            </td>
+                         </tr>
                     </tbody>
                 </table>
 

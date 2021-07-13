@@ -34,6 +34,8 @@ public class CreateServlet extends HttpServlet {
             String content = request.getParameter("content");
             m.setContent(content);
 
+            m.setStatus_flag(Integer.parseInt(request.getParameter("status_flag")));
+
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
             m.setCreated_at(currentTime);
             m.setUpdated_at(currentTime);

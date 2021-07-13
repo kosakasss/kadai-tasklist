@@ -24,19 +24,27 @@ import javax.persistence.Table;
 })
 @Table(name = "tasks")
 public class Task {
+    //ID
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    //タスク内容
     @Column(name = "content", length = 255, nullable = false)
     private String content;
 
+    //作成日時
     @Column(name = "created_at", nullable = false)
     private Timestamp created_at;
 
+    //更新日時
     @Column(name = "updated_at", nullable = false)
     private Timestamp updated_at;
+
+    //タスクの進捗具合（1.未完了　3.完了）
+    @Column(name = "status_flag")
+    private int status_flag;
 
     public Integer getId() {
         return id;
@@ -69,4 +77,15 @@ public class Task {
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
-}
+
+    public int getStatus_flag() {
+        return status_flag;
+    }
+
+    public void setStatus_flag(int status_flag) {
+        this.status_flag = status_flag;
+    }
+
+
+ }
+
