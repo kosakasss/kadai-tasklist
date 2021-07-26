@@ -1,5 +1,6 @@
 package models;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -46,6 +47,10 @@ public class Task {
     @Column(name = "status_flag")
     private int status_flag;
 
+    //締切日
+    @Column(name = "deadline", nullable = false)
+    private Date deadline;
+
     public Integer getId() {
         return id;
     }
@@ -86,6 +91,12 @@ public class Task {
         this.status_flag = status_flag;
     }
 
+    public Date getDeadline() {
+        return deadline;
+    }
 
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
  }
 

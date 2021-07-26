@@ -1,6 +1,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -30,6 +31,13 @@ public class CreateServlet extends HttpServlet {
             EntityManager em = DBUtil.createEntityManager();
 
             Task m = new Task();
+
+            Date deadline = new Date(System.currentTimeMillis());
+            String rd_str = request.getParameter("deadline");
+            if(rd_str != null && !rd_str.equals("")) {
+                deadline = Date.valueOf(request.getParameter("deadline"));
+            }
+            m.setDeadline(deadline);
 
             String content = request.getParameter("content");
             m.setContent(content);

@@ -2,6 +2,7 @@ package controllers;
 
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class UpdateServlet extends HttpServlet {
             Task m = em.find(Task.class, (Integer)(request.getSession().getAttribute("task_id")));
 
             //フォームの内容を各フィールド上書き
+            m.setDeadline(Date.valueOf(request.getParameter("deadline")));
+
             String content = request.getParameter("content");
             m.setContent(content);
 

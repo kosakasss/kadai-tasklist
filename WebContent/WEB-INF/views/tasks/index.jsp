@@ -14,6 +14,7 @@
                 <tr>
                     <th>番号</th>
                     <th>タスク内容</th>
+                    <th>期限</th>
                     <th>状況</th>
                     <th>詳細画面へ</th>
                 </tr>
@@ -21,6 +22,7 @@
                     <tr>
                         <td><c:out value="${task.id}" /></td>
                         <td><c:out value="${task.content}" /></td>
+                        <td><fmt:formatDate value='${task.deadline}' pattern='yyyy-MM-dd' /></td>
                         <td>
                             <c:choose>
                                 <c:when test="${task.status_flag == 0}">
